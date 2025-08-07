@@ -9,9 +9,20 @@ fi
 # Input file from argument
 INPUT="$1"
 
+# Check if file exists
+if [ ! -f "$INPUT" ]; then
+  echo "Error: File '$INPUT' not found"
+  exit 1
+fi
+
 # Extract file extension and base name
-EXT="${INPUT##*.}"
-BASENAME="${INPUT%.*}"
+if [[ "$INPUT" == *.* ]]; then
+  EXT="${INPUT##*.}"
+  BASENAME="${INPUT%.*}"
+else
+  EXT=""
+  BASENAME="$INPUT"
+fi
 
 # Get total duration in seconds
 DURATION=$(ffmpeg -i "$INPUT" 2>&1 | grep "Duration" | awk '{print $2}' | tr -d ,)
@@ -19,7 +30,15 @@ TOTAL_SECONDS=$(echo "$DURATION" | awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3
 HALF_SECONDS=$(echo "$TOTAL_SECONDS / 2" | bc)
 
 # First half
-ffmpeg -i "$INPUT" -t "$HALF_SECONDS" -c copy "${BASENAME}_part1.${EXT}"
+if [ -n "$EXT" ]; then
+  ffmpeg -i "$INPUT" -t "$HALF_SECONDS" -c copy "${BASENAME}_part1.${EXT}"
+else
+  ffmpeg -i "$INPUT" -t "$HALF_SECONDS" -c copy "${BASENAME}_part1"
+fi
 
 # Second half
-ffmpeg -i "$INPUT" -ss "$HALF_SECONDS" -c copy "${BASENAME}_part2.${EXT}"
+if [ -n "$EXT" ]; then
+  ffmpeg -i "$INPUT" -ss "$HALF_SECONDS" -c copy "${BASENAME}_part2.${EXT}"
+else
+  ffmpeg -i "$INPUT" -ss "$HALF_SECONDS" -c copy "${BASENAME}_part2"
+fi
