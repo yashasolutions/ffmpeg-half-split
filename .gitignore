@@ -1,3 +1,187 @@
 .aider*
 *.mp3
 
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.vim/
+.emacs.d/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Dependency directories
+node_modules/
+bower_components/
+vendor/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Java
+*.class
+*.jar
+*.war
+*.ear
+*.nar
+hs_err_pid*
+
+# C/C++
+*.o
+*.a
+*.so
+*.exe
+*.out
+
+# Rust
+target/
+Cargo.lock
+
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+
+# Ruby
+*.gem
+*.rbc
+/.config
+/coverage/
+/InstalledFiles
+/pkg/
+/spec/reports/
+/spec/examples.txt
+/test/tmp/
+/test/version_tmp/
+/tmp/
+.bundle/
+vendor/bundle
+lib/bundler/man/
+
+# PHP
+/vendor/
+composer.phar
+composer.lock
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Temporary files
+*.tmp
+*.temp
+*.bak
+*.backup
+*.orig
+
+# Archives
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Security
+*.pem
+*.key
+*.p12
+*.crt
+*.csr
+id_rsa
+id_dsa
+.ssh/
+
+# Configuration files with secrets
+.env.local
+.env.production
+config.json
+secrets.json
+*.secret
+
+# Cache directories
+.cache/
+.npm/
+.yarn/
+.sass-cache/
+
+# Build outputs
+build/
+dist/
+out/
+target/
+bin/
+obj/
+
+# Test coverage
+coverage/
+*.lcov
+.nyc_output/
+
+# Documentation
+docs/_build/
+
+# Misc
+*.orig
+.vagrant/
+.terraform/
