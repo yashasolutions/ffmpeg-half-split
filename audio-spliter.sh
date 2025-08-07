@@ -24,10 +24,23 @@ else
   BASENAME="$INPUT"
 fi
 
-# Get total duration in seconds
-DURATION=$(ffmpeg -i "$INPUT" 2>&1 | grep "Duration" | awk '{print $2}' | tr -d ,)
-TOTAL_SECONDS=$(echo "$DURATION" | awk -F: '{ print ($1 * 3600) + ($2 * 60) + $3 }')
-HALF_SECONDS=$(echo "$TOTAL_SECONDS / 2" | bc)
+# Get total duration in seconds using ffprobe
+TOTAL_SECONDS=$(ffprobe -v quiet -show_entries format=duration -of csv=p=0 "$INPUT")
+
+# Check if duration was successfully retrieved
+if [ -z "$TOTAL_SECONDS" ] || [ "$TOTAL_SECONDS" = "N/A" ]; then
+  echo "Error: Could not determine duration of '$INPUT'"
+  exit 1
+fi
+
+# Calculate half duration
+HALF_SECONDS=$(echo "scale=3; $TOTAL_SECONDS / 2" | bc -l)
+
+# Validate the calculated duration
+if [ -z "$HALF_SECONDS" ]; then
+  echo "Error: Could not calculate half duration"
+  exit 1
+fi
 
 # First half
 if [ -n "$EXT" ]; then
